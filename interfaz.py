@@ -19,6 +19,8 @@ try:
 except:
     print("NO SE PUDO REALIZAR LA CONEXIÓN")
 
+control = 0
+
 #FUNCION PARA SALIR
 def client_exit():
     exit()
@@ -54,11 +56,35 @@ enviar = Button(root, text="Enviar",command=client_enviar)
 #PONER EL BOTON
 enviar.place(x=200, y=70)
 
+
 #PONER LABEL
 w = Label(root, text="DANIELA BALDIZON")
 w.pack()
 
+vol1=Label(root, text="El valor del potenciometro 1 es")
+vol1.place(x=100,y=150)
+
+vol1=Label(root, text="El valor del potenciometro 2 es")
+vol1.place(x=100,y=210)
+
+voltajem = Label(root, font=("Times new roman",18))
+voltajem.place(x=175, y=175)
 
 
+while 1:
+    ser.flushInput()
+    ser.flushOutput()
+  #  time.sleep(.2)
+    recibido1=ser.read()
+    try:
+        #print ord(recibido1)
+        numero = ord(recibido1)
+        voltajev = float(numero*5.0/255.0)
+        voltajev=round(voltajev,2)
+        voltajemostrado = voltajev
+        voltajem.config (text = voltajemostrado)
+    except:
+        x=0
+    root.update()
 
 root.mainloop()

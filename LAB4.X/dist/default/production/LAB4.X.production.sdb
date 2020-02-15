@@ -3,7 +3,7 @@
 [d edition pro ]
 [d chip 16F887 ]
 [d frameptr 0 ]
-"45 C:\Users\Daniela Baldizon\Documents\GitHub\Lab4\Lab4D2\LAB4.X\MASTER.c
+"46 C:\Users\Daniela Baldizon\Documents\GitHub\Lab4\Lab4D2\LAB4.X\MASTER.c
 [e E1483 . `uc
 SPI_MASTER_OSC_DIV4 32
 SPI_MASTER_OSC_DIV16 33
@@ -59,6 +59,8 @@ SPI_ACTIVE_2_IDLE 64
 [v _main main `(v  1 e 1 0 ]
 "16 C:\Users\Daniela Baldizon\Documents\GitHub\Lab4\Lab4D2\LAB4.X\RXTX.c
 [v _UART_Init UART_Init `(uc  1 e 1 0 ]
+"39
+[v _UART_Write UART_Write `(v  1 e 1 0 ]
 "56
 [v _UART_Read UART_Read `(uc  1 e 1 0 ]
 "12 C:\Users\Daniela Baldizon\Documents\GitHub\Lab4\Lab4D2\LAB4.X\SPIM.c
@@ -69,7 +71,9 @@ SPI_ACTIVE_2_IDLE 64
 [v _spiWrite spiWrite `(v  1 e 1 0 ]
 "47
 [v _spiRead spiRead `(uc  1 e 1 0 ]
-"228 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f887.h
+"166 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f887.h
+[v _PORTA PORTA `VEuc  1 e 1 @5 ]
+"228
 [v _PORTB PORTB `VEuc  1 e 1 @6 ]
 "843
 [v _SSPBUF SSPBUF `VEuc  1 e 1 @19 ]
@@ -79,11 +83,13 @@ SPI_ACTIVE_2_IDLE 64
 [v _TXREG TXREG `VEuc  1 e 1 @25 ]
 "1140
 [v _RCREG RCREG `VEuc  1 e 1 @26 ]
+"1416
+[v _TRISA TRISA `VEuc  1 e 1 @133 ]
 "1478
 [v _TRISB TRISB `VEuc  1 e 1 @134 ]
 "2177
 [v _SSPSTAT SSPSTAT `VEuc  1 e 1 @148 ]
-[s S124 . 1 `uc 1 BF 1 0 :1:0 
+[s S129 . 1 `uc 1 BF 1 0 :1:0 
 `uc 1 UA 1 0 :1:1 
 `uc 1 R_nW 1 0 :1:2 
 `uc 1 S 1 0 :1:3 
@@ -93,39 +99,39 @@ SPI_ACTIVE_2_IDLE 64
 `uc 1 SMP 1 0 :1:7 
 ]
 "2231
-[s S133 . 1 `uc 1 . 1 0 :2:0 
+[s S138 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 R 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
 `uc 1 D 1 0 :1:5 
 ]
-[s S138 . 1 `uc 1 . 1 0 :2:0 
+[s S143 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 I2C_READ 1 0 :1:2 
 `uc 1 I2C_START 1 0 :1:3 
 `uc 1 I2C_STOP 1 0 :1:4 
 `uc 1 I2C_DATA 1 0 :1:5 
 ]
-[s S144 . 1 `uc 1 . 1 0 :2:0 
+[s S149 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 nW 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
 `uc 1 nA 1 0 :1:5 
 ]
-[s S149 . 1 `uc 1 . 1 0 :2:0 
+[s S154 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 nWRITE 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
 `uc 1 nADDRESS 1 0 :1:5 
 ]
-[s S154 . 1 `uc 1 . 1 0 :2:0 
+[s S159 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 R_W 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
 `uc 1 D_A 1 0 :1:5 
 ]
-[s S159 . 1 `uc 1 . 1 0 :2:0 
+[s S164 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 READ_WRITE 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
 `uc 1 DATA_ADDRESS 1 0 :1:5 
 ]
-[u S164 . 1 `S124 1 . 1 0 `S133 1 . 1 0 `S138 1 . 1 0 `S144 1 . 1 0 `S149 1 . 1 0 `S154 1 . 1 0 `S159 1 . 1 0 ]
-[v _SSPSTATbits SSPSTATbits `VES164  1 e 1 @148 ]
+[u S169 . 1 `S129 1 . 1 0 `S138 1 . 1 0 `S143 1 . 1 0 `S149 1 . 1 0 `S154 1 . 1 0 `S159 1 . 1 0 `S164 1 . 1 0 ]
+[v _SSPSTATbits SSPSTATbits `VES169  1 e 1 @148 ]
 "2642
 [v _SPBRG SPBRG `VEuc  1 e 1 @153 ]
 "3387
@@ -159,9 +165,11 @@ SPI_ACTIVE_2_IDLE 64
 "32 C:\Users\Daniela Baldizon\Documents\GitHub\Lab4\Lab4D2\LAB4.X\MASTER.c
 [v _main main `(v  1 e 1 0 ]
 {
-"42
+"43
 [v main@POT2 POT2 `uc  1 a 1 24 ]
-"67
+"42
+[v main@POT1 POT1 `uc  1 a 1 23 ]
+"68
 } 0
 "34 C:\Users\Daniela Baldizon\Documents\GitHub\Lab4\Lab4D2\LAB4.X\SPIM.c
 [v _spiWrite spiWrite `(v  1 e 1 0 ]
@@ -194,7 +202,20 @@ SPI_ACTIVE_2_IDLE 64
 [v spiInit@sType sType `E1264  1 a 1 3 ]
 "27
 } 0
-"16 C:\Users\Daniela Baldizon\Documents\GitHub\Lab4\Lab4D2\LAB4.X\RXTX.c
+"39 C:\Users\Daniela Baldizon\Documents\GitHub\Lab4\Lab4D2\LAB4.X\RXTX.c
+[v _UART_Write UART_Write `(v  1 e 1 0 ]
+{
+[v UART_Write@data data `uc  1 a 1 wreg ]
+[v UART_Write@data data `uc  1 a 1 wreg ]
+[v UART_Write@data data `uc  1 a 1 2 ]
+"44
+} 0
+"56
+[v _UART_Read UART_Read `(uc  1 e 1 0 ]
+{
+"67
+} 0
+"16
 [v _UART_Init UART_Init `(uc  1 e 1 0 ]
 {
 "18

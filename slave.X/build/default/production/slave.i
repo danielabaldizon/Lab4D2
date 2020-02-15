@@ -2913,10 +2913,11 @@ void __attribute__((picinterrupt(("")))) ISR(void){
 
     if(SSPIF==1){
         opcion = spiRead();
-        if(opcion == 1){
+        spiWrite(adc2);
+        if(opcion == 0x01){
             spiWrite(adc1);
         }
-        else if(opcion == 2){
+        else if(opcion == 0x02){
             spiWrite(adc2);
         }
         SSPIF = 0;
@@ -2931,11 +2932,11 @@ void main(void){
     TRISD = 0;
 
     TRISA = 0;
-     PORTA = 0;
+    PORTA = 0;
 
 
-    ADC_CONFIG(12,0);
     ADC_CONFIG(10,0);
+    ADC_CONFIG(12,0);
     ADC_INTERRUPT();
     ADCON0bits.GO = 1;
 
@@ -2945,7 +2946,8 @@ void main(void){
     spiInit(SPI_SLAVE_SS_EN, SPI_DATA_SAMPLE_MIDDLE, SPI_CLOCK_IDLE_LOW, SPI_IDLE_2_ACTIVE);
 
     while(1){
-        PORTA = adc1;
+
+
 
     }
 

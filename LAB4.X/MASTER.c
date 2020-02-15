@@ -35,33 +35,34 @@ void main(void){
     ANSEL = 0;
     TRISB = 0;
     PORTB = 0;
-    
+    TRISA = 0;
+    PORTA = 0;
     //CONFIG 
     UART_Init(9600);
-    char POT1; //VARIABLES QUE SE LEEN DEL ADC
-    char POT2;
+    unsigned char POT1; //VARIABLES QUE SE LEEN DEL ADC
+    unsigned char POT2;
     uint8_t COMPU = 0;
     
     spiInit(SPI_MASTER_OSC_DIV4, SPI_DATA_SAMPLE_MIDDLE, SPI_CLOCK_IDLE_LOW, SPI_IDLE_2_ACTIVE);
     
     while(1){
-     //   UART_Write(POT1); //ESCRIBIR EL ADC A LA COMPU
-       // UART_Write(POT2);
+        UART_Write(POT1); //ESCRIBIR EL ADC A LA COMPU
+        UART_Write(POT2);
         
-        //PORTB = UART_Read();//LEER LO QUE SE LE MANDA DE LA COMPU
+        COMPU = UART_Read();//LEER LO QUE SE LE MANDA DE LA COMPU
       //  PORTB = COMPU; //ESCRIBE EN EL PUERTO B LO QUE RECIBE DE LA COMPU
-        __delay_ms(5);
+      //  __delay_ms(5);
         
         spiWrite(0x01);             //ENVIA UN 1 PARA PEDIR EL VALOR DE POT1
         POT1 = spiRead();           //GUARDA EL VALOR
-       // PORTB = POT1;
-        __delay_ms(1);
+        PORTB = POT1;
+        __delay_ms(0.1);
         
         
         spiWrite(0x02);         //ENVIA COMANDO PARA EL VALOR POT2
         POT2 = spiRead();      //GUARDA EL VALOR
-        PORTB = POT2;
-        __delay_ms(5);  
+        PORTA = POT2;
+        __delay_ms(0.1);  
         
     }//CIERRE DEL WHILE  
 }//CIERRE DEL MAIN

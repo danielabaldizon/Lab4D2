@@ -2896,33 +2896,34 @@ void main(void){
     ANSEL = 0;
     TRISB = 0;
     PORTB = 0;
-
+    TRISA = 0;
+    PORTA = 0;
 
     UART_Init(9600);
-    char POT1;
-    char POT2;
+    unsigned char POT1;
+    unsigned char POT2;
     uint8_t COMPU = 0;
 
     spiInit(SPI_MASTER_OSC_DIV4, SPI_DATA_SAMPLE_MIDDLE, SPI_CLOCK_IDLE_LOW, SPI_IDLE_2_ACTIVE);
 
     while(1){
+        UART_Write(POT1);
+        UART_Write(POT2);
+
+        COMPU = UART_Read();
 
 
-
-
-
-        _delay((unsigned long)((5)*(4000000/4000.0)));
 
         spiWrite(0x01);
         POT1 = spiRead();
-
-        _delay((unsigned long)((1)*(4000000/4000.0)));
+        PORTB = POT1;
+        _delay((unsigned long)((0.1)*(4000000/4000.0)));
 
 
         spiWrite(0x02);
         POT2 = spiRead();
-        PORTB = POT2;
-        _delay((unsigned long)((5)*(4000000/4000.0)));
+        PORTA = POT2;
+        _delay((unsigned long)((0.1)*(4000000/4000.0)));
 
     }
 }

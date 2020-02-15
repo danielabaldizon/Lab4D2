@@ -75,8 +75,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 "4274 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f887.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f887.h: 4274: extern volatile __bit SSPIE __attribute__((address(0x463)));
 [v _SSPIE `Vb ~T0 @X0 0 e@1123 ]
-"84 slave.c
-[; ;slave.c: 84:     spiInit(SPI_SLAVE_SS_EN, SPI_DATA_SAMPLE_MIDDLE, SPI_CLOCK_IDLE_LOW, SPI_IDLE_2_ACTIVE);
+"85 slave.c
+[; ;slave.c: 85:     spiInit(SPI_SLAVE_SS_EN, SPI_DATA_SAMPLE_MIDDLE, SPI_CLOCK_IDLE_LOW, SPI_IDLE_2_ACTIVE);
 [c E1473 32 33 34 35 36 37 .. ]
 [n E1473 . SPI_MASTER_OSC_DIV4 SPI_MASTER_OSC_DIV16 SPI_MASTER_OSC_DIV64 SPI_MASTER_TMR2 SPI_SLAVE_SS_EN SPI_SLAVE_SS_DIS  ]
 [c E1481 0 128 .. ]
@@ -429,97 +429,97 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;slave.c: 54:         opcion = spiRead();
 [e = _opcion ( _spiRead ..  ]
 "55
-[; ;slave.c: 55:         if(opcion == 1){
+[; ;slave.c: 55:         spiWrite(adc2);
+[e ( _spiWrite (1 -> _adc2 `uc ]
+"56
+[; ;slave.c: 56:         if(opcion == 0x01){
 [e $ ! == -> _opcion `i -> 1 `i 149  ]
 {
-"56
-[; ;slave.c: 56:             spiWrite(adc1);
-[e ( _spiWrite (1 -> _adc1 `uc ]
 "57
-[; ;slave.c: 57:         }
+[; ;slave.c: 57:             spiWrite(adc1);
+[e ( _spiWrite (1 -> _adc1 `uc ]
+"58
+[; ;slave.c: 58:         }
 }
 [e $U 150  ]
-"58
-[; ;slave.c: 58:         else if(opcion == 2){
+"59
+[; ;slave.c: 59:         else if(opcion == 0x02){
 [e :U 149 ]
 [e $ ! == -> _opcion `i -> 2 `i 151  ]
 {
-"59
-[; ;slave.c: 59:             spiWrite(adc2);
-[e ( _spiWrite (1 -> _adc2 `uc ]
 "60
-[; ;slave.c: 60:         }
+[; ;slave.c: 60:             spiWrite(adc2);
+[e ( _spiWrite (1 -> _adc2 `uc ]
+"61
+[; ;slave.c: 61:         }
 }
 [e :U 151 ]
 [e :U 150 ]
-"61
-[; ;slave.c: 61:         SSPIF = 0;
-[e = _SSPIF -> -> 0 `i `b ]
 "62
-[; ;slave.c: 62:     }
+[; ;slave.c: 62:         SSPIF = 0;
+[e = _SSPIF -> -> 0 `i `b ]
+"63
+[; ;slave.c: 63:     }
 }
 [e :U 148 ]
-"64
-[; ;slave.c: 64: }
+"65
+[; ;slave.c: 65: }
 [e :UE 143 ]
 }
 [v $root$_main `(v ~T0 @X0 0 e ]
-"66
-[; ;slave.c: 66: void main(void){
+"67
+[; ;slave.c: 67: void main(void){
 [v _main `(v ~T0 @X0 1 ef ]
 {
 [e :U _main ]
 [f ]
-"68
-[; ;slave.c: 68:     ANSELH = 0;
-[e = _ANSELH -> -> 0 `i `uc ]
 "69
-[; ;slave.c: 69:     ANSEL = 0;
-[e = _ANSEL -> -> 0 `i `uc ]
+[; ;slave.c: 69:     ANSELH = 0;
+[e = _ANSELH -> -> 0 `i `uc ]
 "70
-[; ;slave.c: 70:     TRISD = 0;
+[; ;slave.c: 70:     ANSEL = 0;
+[e = _ANSEL -> -> 0 `i `uc ]
+"71
+[; ;slave.c: 71:     TRISD = 0;
 [e = _TRISD -> -> 0 `i `uc ]
-"72
-[; ;slave.c: 72:     TRISA = 0;
-[e = _TRISA -> -> 0 `i `uc ]
 "73
-[; ;slave.c: 73:      PORTA = 0;
+[; ;slave.c: 73:     TRISA = 0;
+[e = _TRISA -> -> 0 `i `uc ]
+"74
+[; ;slave.c: 74:     PORTA = 0;
 [e = _PORTA -> -> 0 `i `uc ]
-"76
-[; ;slave.c: 76:     ADC_CONFIG(12,0);
-[e ( _ADC_CONFIG (2 , -> -> 12 `i `uc -> -> 0 `i `uc ]
 "77
 [; ;slave.c: 77:     ADC_CONFIG(10,0);
 [e ( _ADC_CONFIG (2 , -> -> 10 `i `uc -> -> 0 `i `uc ]
 "78
-[; ;slave.c: 78:     ADC_INTERRUPT();
-[e ( _ADC_INTERRUPT ..  ]
+[; ;slave.c: 78:     ADC_CONFIG(12,0);
+[e ( _ADC_CONFIG (2 , -> -> 12 `i `uc -> -> 0 `i `uc ]
 "79
-[; ;slave.c: 79:     ADCON0bits.GO = 1;
+[; ;slave.c: 79:     ADC_INTERRUPT();
+[e ( _ADC_INTERRUPT ..  ]
+"80
+[; ;slave.c: 80:     ADCON0bits.GO = 1;
 [e = . . _ADCON0bits 1 1 -> -> 1 `i `uc ]
-"82
-[; ;slave.c: 82:     SSPIF = 0;
-[e = _SSPIF -> -> 0 `i `b ]
 "83
-[; ;slave.c: 83:     SSPIE = 1;
-[e = _SSPIE -> -> 1 `i `b ]
+[; ;slave.c: 83:     SSPIF = 0;
+[e = _SSPIF -> -> 0 `i `b ]
 "84
-[; ;slave.c: 84:     spiInit(SPI_SLAVE_SS_EN, SPI_DATA_SAMPLE_MIDDLE, SPI_CLOCK_IDLE_LOW, SPI_IDLE_2_ACTIVE);
+[; ;slave.c: 84:     SSPIE = 1;
+[e = _SSPIE -> -> 1 `i `b ]
+"85
+[; ;slave.c: 85:     spiInit(SPI_SLAVE_SS_EN, SPI_DATA_SAMPLE_MIDDLE, SPI_CLOCK_IDLE_LOW, SPI_IDLE_2_ACTIVE);
 [e ( _spiInit (4 , , , . `E1473 4 . `E1481 0 . `E1485 1 . `E1489 0 ]
-"86
-[; ;slave.c: 86:     while(1){
+"87
+[; ;slave.c: 87:     while(1){
 [e :U 154 ]
 {
-"87
-[; ;slave.c: 87:         PORTA = adc1;
-[e = _PORTA _adc1 ]
-"89
-[; ;slave.c: 89:     }
+"91
+[; ;slave.c: 91:     }
 }
 [e :U 153 ]
 [e $U 154  ]
 [e :U 155 ]
-"91
-[; ;slave.c: 91: }
+"93
+[; ;slave.c: 93: }
 [e :UE 152 ]
 }

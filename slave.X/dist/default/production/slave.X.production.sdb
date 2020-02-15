@@ -3,7 +3,7 @@
 [d edition pro ]
 [d chip 16F887 ]
 [d frameptr 0 ]
-"84 C:\Users\Daniela Baldizon\Documents\GitHub\Lab4\Lab4D2\slave.X\slave.c
+"85 C:\Users\Daniela Baldizon\Documents\GitHub\Lab4\Lab4D2\slave.X\slave.c
 [e E1473 . `uc
 SPI_MASTER_OSC_DIV4 32
 SPI_MASTER_OSC_DIV16 33
@@ -59,7 +59,7 @@ SPI_ACTIVE_2_IDLE 64
 [v ___memcpyee __memcpyee `(v  1 e 1 0 ]
 "36 C:\Users\Daniela Baldizon\Documents\GitHub\Lab4\Lab4D2\slave.X\slave.c
 [v _ISR ISR `II(v  1 e 1 0 ]
-"66
+"67
 [v _main main `(v  1 e 1 0 ]
 "12 C:\Users\Daniela Baldizon\Documents\GitHub\Lab4\Lab4D2\slave.X\SPIS.c
 [v _spiInit spiInit `(v  1 e 1 0 ]
@@ -273,10 +273,10 @@ SPI_ACTIVE_2_IDLE 64
 [v _canal canal `uc  1 e 1 0 ]
 "34
 [v _opcion opcion `uc  1 e 1 0 ]
-"66
+"67
 [v _main main `(v  1 e 1 0 ]
 {
-"91
+"93
 } 0
 "12 C:\Users\Daniela Baldizon\Documents\GitHub\Lab4\Lab4D2\slave.X\SPIS.c
 [v _spiInit spiInit `(v  1 e 1 0 ]
@@ -307,7 +307,7 @@ SPI_ACTIVE_2_IDLE 64
 "36 C:\Users\Daniela Baldizon\Documents\GitHub\Lab4\Lab4D2\slave.X\slave.c
 [v _ISR ISR `II(v  1 e 1 0 ]
 {
-"64
+"65
 } 0
 "34 C:\Users\Daniela Baldizon\Documents\GitHub\Lab4\Lab4D2\slave.X\SPIS.c
 [v _spiWrite spiWrite `(v  1 e 1 0 ]

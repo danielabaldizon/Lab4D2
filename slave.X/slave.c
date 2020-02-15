@@ -26,7 +26,7 @@
 #include <stdint.h>
 #include "SPIS.h"
 #include "ADC.h"
-#define _XTAL_FREQ 4000000
+#define _XTAL_FREQ 8000000
 
 uint8_t adc1;
 uint8_t adc2;
@@ -51,11 +51,12 @@ void __interrupt() ISR(void){
     }
     
     if(SSPIF==1){ // SI LA BANDERA DEL SPI ESTÁ ARRIBA
-        opcion = spiRead(); // RECIBE LA ORDEN Y LA REVISA
-        if(opcion == 1){
+        opcion = spiRead(); // RECIBE LA ORDEN Y LA REVISA7
+        spiWrite(adc2);
+        if(opcion == 0x01){
             spiWrite(adc1); //MANDA EL VALOR 1
         }
-        else if(opcion == 2){
+        else if(opcion == 0x02){
             spiWrite(adc2); //MANDA EL VALOR 2
         }
         SSPIF = 0; //LIMPIAR LA BANDERA DEL SPI 
@@ -73,8 +74,8 @@ void main(void){
     PORTA = 0;
     
     //ADC
-    ADC_CONFIG(12,0); //CANAL 12 JUSTIFIACION A LA IZQUIERDA
     ADC_CONFIG(10,0); //CANAL 10 JUSTIFICACION A LA IZQUIERDA
+    ADC_CONFIG(12,0); //CANAL 12 JUSTIFIACION A LA IZQUIERDA
     ADC_INTERRUPT(); //INTERRUPCION DEL ADC
     ADCON0bits.GO = 1;      //INICIA EL ADC
     
@@ -84,7 +85,7 @@ void main(void){
     spiInit(SPI_SLAVE_SS_EN, SPI_DATA_SAMPLE_MIDDLE, SPI_CLOCK_IDLE_LOW, SPI_IDLE_2_ACTIVE);
     
     while(1){
-        //PORTA = adc1;
+      //  PORTA = adc2;
       //  ADCON0bits.GO = 1;      //INICIA EL ADC
        
     }
