@@ -2850,42 +2850,41 @@ char UART_Read();
 void UART_Read_Text(char *Output, unsigned int length);
 # 27 "MASTER.c" 2
 
-# 1 "./SPI.h" 1
-# 10 "./SPI.h"
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdint.h" 1 3
-# 10 "./SPI.h" 2
-
-
-
+# 1 "./SPIM.h" 1
+# 13 "./SPIM.h"
 typedef enum
 {
-  SPI_MASTER_OSC_DIV4 = 0b00100000,
-  SPI_MASTER_OSC_DIV16 = 0b00100001,
-  SPI_MASTER_OSC_DIV64 = 0b00100010,
-  SPI_MASTER_TMR2 = 0b00100011,
-  SPI_SLAVE_SS_EN = 0b00100100,
-  SPI_SLAVE_SS_DIS = 0b00100101
+    SPI_MASTER_OSC_DIV4 = 0b00100000,
+    SPI_MASTER_OSC_DIV16 = 0b00100001,
+    SPI_MASTER_OSC_DIV64 = 0b00100010,
+    SPI_MASTER_TMR2 = 0b00100011,
+    SPI_SLAVE_SS_EN = 0b00100100,
+    SPI_SLAVE_SS_DIS = 0b00100101
 }Spi_Type;
 
 typedef enum
 {
-  SPI_DATA_SAMPLE_MIDDLE = 0b00000000,
-  SPI_DATA_SAMPLE_END = 0b10000000
+    SPI_DATA_SAMPLE_MIDDLE = 0b00000000,
+    SPI_DATA_SAMPLE_END = 0b10000000
 }Spi_Data_Sample;
 
 typedef enum
 {
-  SPI_CLOCK_IDLE_HIGH = 0b00001000,
-  SPI_CLOCK_IDLE_LOW = 0b00000000
+    SPI_CLOCK_IDLE_HIGH = 0b00010000,
+    SPI_CLOCK_IDLE_LOW = 0b00000000
 }Spi_Clock_Idle;
 
 typedef enum
 {
-  SPI_IDLE_2_ACTIVE = 0b00000000,
-  SPI_ACTIVE_2_IDLE = 0b01000000
+    SPI_IDLE_2_ACTIVE = 0b00000000,
+    SPI_ACTIVE_2_IDLE = 0b01000000
 }Spi_Transmit_Edge;
 
-void spiInit(Spi_Type sType, Spi_Data_Sample sDataSample, Spi_Clock_Idle sClockIdle, Spi_Transmit_Edge sTransmitEdge);
+
+void spiInit(Spi_Type, Spi_Data_Sample, Spi_Clock_Idle, Spi_Transmit_Edge);
+void spiWrite(char);
+unsigned spiDataReady();
+char spiRead();
 # 28 "MASTER.c" 2
 
 
@@ -2904,17 +2903,26 @@ void main(void){
     char POT2;
     uint8_t COMPU = 0;
 
-    spiInit(SPI_SLAVE_SS_DIS, SPI_DATA_SAMPLE_END, SPI_CLOCK_IDLE_LOW, SPI_IDLE_2_ACTIVE);
+    spiInit(SPI_MASTER_OSC_DIV4, SPI_DATA_SAMPLE_MIDDLE, SPI_CLOCK_IDLE_LOW, SPI_IDLE_2_ACTIVE);
 
     while(1){
 
 
 
-        PORTB = UART_Read();
 
 
+        _delay((unsigned long)((5)*(4000000/4000.0)));
+
+        spiWrite(0x01);
+        POT1 = spiRead();
+
+        _delay((unsigned long)((1)*(4000000/4000.0)));
 
 
+        spiWrite(0x02);
+        POT2 = spiRead();
+        PORTB = POT2;
+        _delay((unsigned long)((5)*(4000000/4000.0)));
 
     }
 }

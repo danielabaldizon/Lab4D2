@@ -4,12 +4,10 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
-      <itemPath>ADC.c</itemPath>
-      <itemPath>ADC.h</itemPath>
       <itemPath>RXTX.c</itemPath>
       <itemPath>RXTX.h</itemPath>
-      <itemPath>SPI.h</itemPath>
-      <itemPath>SPI.c</itemPath>
+      <itemPath>SPIM.h</itemPath>
+      <itemPath>SPIM.c</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -180,7 +178,7 @@
         <property key="programoptions.testmodeentrymethod" value="VDDFirst"/>
         <property key="programoptions.usehighvoltageonmclr" value="false"/>
         <property key="programoptions.uselvpprogramming" value="false"/>
-        <property key="voltagevalue" value="4.625"/>
+        <property key="voltagevalue" value="3.625"/>
       </PICkit3PlatformTool>
       <XC8-config-global>
         <property key="advanced-elf" value="true"/>
