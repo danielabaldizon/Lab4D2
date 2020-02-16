@@ -6,12 +6,14 @@
 from tkinter import *
 import serial
 import sys
+import time
 
 #CONEXION SERIAL
 try:
     ser = serial.Serial(port='COM9', baudrate=9600, parity=serial.PARITY_NONE, stopbits=serial.STOPBITS_ONE,
                         bytesize=serial.EIGHTBITS, timeout=0)
     ser.setDTR(False)
+    time.sleep(1)
     ser.flushInput()
     ser.setDTR(True)
     print("CONEXIÓN EXITOSA")
@@ -30,7 +32,7 @@ def client_enviar():
     escritura = entry.get() #AGARRAR EL DATO ESCRITO
     enviado = chr(int(escritura)) #PASAR A CHAR EL VALOR
     ser.write(bytes(enviado.encode())) #ENVIAR SERIALMENTE
-    print(enviado)
+   # print(enviado)
     entry.delete(0, END) #BORRAR TODO LO QUE ESTA ESCRITO EN EL CAMPO 
 
     
@@ -70,19 +72,32 @@ vol1.place(x=100,y=210)
 voltajem = Label(root, font=("Times new roman",18))
 voltajem.place(x=175, y=175)
 
+voltajem2 = Label(root, font=("Times new roman",18))
+voltajem2.place(x=175, y=230)
+
+voltajev=0
+plex = 1
 
 while 1:
     ser.flushInput()
     ser.flushOutput()
   #  time.sleep(.2)
-    recibido1=ser.read()
+    recibido1 = ser.read()
     try:
-        #print ord(recibido1)
         numero = ord(recibido1)
-        voltajev = float(numero*5.0/255.0)
+        voltajev = float(numero/51.0)
         voltajev=round(voltajev,2)
-        voltajemostrado = voltajev
-        voltajem.config (text = voltajemostrado)
+        rest = abs(voltajev-control)
+       # if (rest>2):
+          #  voltajev = 0;
+        if (plex == 1):
+            voltajem.config (text = voltajev)
+            plex = 2
+        elif (plex == 2):
+            voltajem2.config (text = voltajev)
+            plex = 1
+        control=voltajev
+        time.sleep(0.01)
     except:
         x=0
     root.update()

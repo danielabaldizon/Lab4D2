@@ -2902,28 +2902,34 @@ void main(void){
     UART_Init(9600);
     unsigned char POT1;
     unsigned char POT2;
-    uint8_t COMPU = 0;
+    uint8_t COMPU;
 
     spiInit(SPI_MASTER_OSC_DIV4, SPI_DATA_SAMPLE_MIDDLE, SPI_CLOCK_IDLE_LOW, SPI_IDLE_2_ACTIVE);
 
     while(1){
+
         UART_Write(POT1);
+
+
         UART_Write(POT2);
 
-        COMPU = UART_Read();
 
+        COMPU = UART_Read();
+        PORTB = COMPU;
 
 
         spiWrite(0x01);
         POT1 = spiRead();
-        PORTB = POT1;
-        _delay((unsigned long)((0.1)*(4000000/4000.0)));
+        PORTA = POT1;
+
+        _delay((unsigned long)((0.8)*(4000000/4000.0)));
 
 
         spiWrite(0x02);
         POT2 = spiRead();
-        PORTA = POT2;
-        _delay((unsigned long)((0.1)*(4000000/4000.0)));
+
+
+        _delay((unsigned long)((0.8)*(4000000/4000.0)));
 
     }
 }
