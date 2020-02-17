@@ -26,7 +26,7 @@
 #include <stdint.h>
 #include "RXTX.h"
 #include "SPIM.h"
-#define _XTAL_FREQ 4000000
+#define _XTAL_FREQ 8000000
 
 
 void main(void){
@@ -41,33 +41,34 @@ void main(void){
     UART_Init(9600);
     unsigned char POT1; //VARIABLES QUE SE LEEN DEL ADC
     unsigned char POT2;
-    uint8_t COMPU;
+    uint16_t COMPU;
     
     spiInit(SPI_MASTER_OSC_DIV4, SPI_DATA_SAMPLE_MIDDLE, SPI_CLOCK_IDLE_LOW, SPI_IDLE_2_ACTIVE);
     
     while(1){
-    //    UART_Write('/');
+        
         UART_Write(POT1); //ESCRIBIR EL ADC A LA COMPU
-      //  UART_Write('/');
-        //__delay_ms(500);
+        __delay_ms(10);
         UART_Write(POT2);
-       // UART_Write('/');
+
+        
+      //  __delay_ms(7);
         
         COMPU = UART_Read();//LEER LO QUE SE LE MANDA DE LA COMPU
         PORTB = COMPU; //ESCRIBE EN EL PUERTO B LO QUE RECIBE DE LA COMPU
-      //  __delay_ms(500);
+        
+      //  __delay_ms(7);
         
         spiWrite(0x01);             //ENVIA UN 1 PARA PEDIR EL VALOR DE POT1
         POT1 = spiRead();           //GUARDA EL VALOR
-        PORTA = POT1;
+
         
         __delay_ms(0.8);
         
         
         spiWrite(0x02);         //ENVIA COMANDO PARA EL VALOR POT2
         POT2 = spiRead();      //GUARDA EL VALOR
-        
-    //    PORTA = POT2;
+     
         __delay_ms(0.8);  
         
     }//CIERRE DEL WHILE  

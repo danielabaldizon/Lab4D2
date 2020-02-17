@@ -30,9 +30,8 @@ def client_exit():
 #FUNCION PARA ENVIAR Y BORRAR EL TEXTO
 def client_enviar():
     escritura = entry.get() #AGARRAR EL DATO ESCRITO
-    enviado = chr(int(escritura)) #PASAR A CHAR EL VALOR
-    ser.write(bytes(enviado.encode())) #ENVIAR SERIALMENTE
-   # print(enviado)
+    enviado = (int(escritura)).to_bytes(1, byteorder = 'big') #PASAR A CHAR EL VALOR
+    ser.write(enviado)  #ENVIAR SERIALMENTE
     entry.delete(0, END) #BORRAR TODO LO QUE ESTA ESCRITO EN EL CAMPO 
 
     
@@ -77,27 +76,30 @@ voltajem2.place(x=175, y=230)
 
 voltajev=0
 plex = 1
+flag = 0
 
 while 1:
     ser.flushInput()
     ser.flushOutput()
-  #  time.sleep(.2)
-    recibido1 = ser.read()
+    recibido1 = ser.readline()
     try:
         numero = ord(recibido1)
+       # print(numero)
         voltajev = float(numero/51.0)
         voltajev=round(voltajev,2)
         rest = abs(voltajev-control)
-       # if (rest>2):
-          #  voltajev = 0;
+      #  if (rest>2):
+       #     voltajev = 0;
         if (plex == 1):
             voltajem.config (text = voltajev)
+            print(numero)
             plex = 2
         elif (plex == 2):
             voltajem2.config (text = voltajev)
+            print(numero)
             plex = 1
         control=voltajev
-        time.sleep(0.01)
+        print(plex)
     except:
         x=0
     root.update()

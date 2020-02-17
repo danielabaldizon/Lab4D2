@@ -37,7 +37,11 @@ Version 4.0 HI-TECH Software Intermediate Code
 "14 ./RXTX.h
 [; ;./RXTX.h: 14: void UART_Write(char data);
 [v _UART_Write `(v ~T0 @X0 0 ef1`uc ]
-"17
+[v F1256 `(v ~T0 @X0 1 tf1`ul ]
+"92 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic.h
+[v __delay `JF1256 ~T0 @X0 0 e ]
+[p i __delay ]
+"17 ./RXTX.h
 [; ;./RXTX.h: 17: char UART_Read();
 [v _UART_Read `(uc ~T0 @X0 0 e? ]
 "43 ./SPIM.h
@@ -46,10 +50,6 @@ Version 4.0 HI-TECH Software Intermediate Code
 "45
 [; ;./SPIM.h: 45: char spiRead();
 [v _spiRead `(uc ~T0 @X0 0 e? ]
-[v F1256 `(v ~T0 @X0 1 tf1`ul ]
-"92 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic.h
-[v __delay `JF1256 ~T0 @X0 0 e ]
-[p i __delay ]
 "8 MASTER.c
 [p x FOSC = INTRC_NOCLKOUT ]
 "9
@@ -343,8 +343,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;MASTER.c: 43:     unsigned char POT2;
 [v _POT2 `uc ~T0 @X0 1 a ]
 "44
-[; ;MASTER.c: 44:     uint8_t COMPU;
-[v _COMPU `uc ~T0 @X0 1 a ]
+[; ;MASTER.c: 44:     uint16_t COMPU;
+[v _COMPU `ui ~T0 @X0 1 a ]
 "46
 [; ;MASTER.c: 46:     spiInit(SPI_MASTER_OSC_DIV4, SPI_DATA_SAMPLE_MIDDLE, SPI_CLOCK_IDLE_LOW, SPI_IDLE_2_ACTIVE);
 [e ( _spiInit (4 , , , . `E1483 0 . `E1491 0 . `E1495 1 . `E1499 0 ]
@@ -355,43 +355,43 @@ Version 4.0 HI-TECH Software Intermediate Code
 "50
 [; ;MASTER.c: 50:         UART_Write(POT1);
 [e ( _UART_Write (1 -> _POT1 `uc ]
-"53
-[; ;MASTER.c: 53:         UART_Write(POT2);
+"51
+[; ;MASTER.c: 51:         _delay((unsigned long)((10)*(8000000/4000.0)));
+[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
+"52
+[; ;MASTER.c: 52:         UART_Write(POT2);
 [e ( _UART_Write (1 -> _POT2 `uc ]
-"56
-[; ;MASTER.c: 56:         COMPU = UART_Read();
-[e = _COMPU -> ( _UART_Read ..  `uc ]
 "57
-[; ;MASTER.c: 57:         PORTB = COMPU;
-[e = _PORTB _COMPU ]
-"60
-[; ;MASTER.c: 60:         spiWrite(0x01);
-[e ( _spiWrite (1 -> -> 1 `i `uc ]
-"61
-[; ;MASTER.c: 61:         POT1 = spiRead();
-[e = _POT1 -> ( _spiRead ..  `uc ]
+[; ;MASTER.c: 57:         COMPU = UART_Read();
+[e = _COMPU -> ( _UART_Read ..  `ui ]
+"58
+[; ;MASTER.c: 58:         PORTB = COMPU;
+[e = _PORTB -> _COMPU `uc ]
 "62
-[; ;MASTER.c: 62:         PORTA = POT1;
-[e = _PORTA _POT1 ]
-"64
-[; ;MASTER.c: 64:         _delay((unsigned long)((0.8)*(4000000/4000.0)));
-[e ( __delay (1 -> * .0.8 / -> -> 4000000 `l `d .4000.0 `ul ]
-"67
-[; ;MASTER.c: 67:         spiWrite(0x02);
+[; ;MASTER.c: 62:         spiWrite(0x01);
+[e ( _spiWrite (1 -> -> 1 `i `uc ]
+"63
+[; ;MASTER.c: 63:         POT1 = spiRead();
+[e = _POT1 -> ( _spiRead ..  `uc ]
+"66
+[; ;MASTER.c: 66:         _delay((unsigned long)((0.8)*(8000000/4000.0)));
+[e ( __delay (1 -> * .0.8 / -> -> 8000000 `l `d .4000.0 `ul ]
+"69
+[; ;MASTER.c: 69:         spiWrite(0x02);
 [e ( _spiWrite (1 -> -> 2 `i `uc ]
-"68
-[; ;MASTER.c: 68:         POT2 = spiRead();
+"70
+[; ;MASTER.c: 70:         POT2 = spiRead();
 [e = _POT2 -> ( _spiRead ..  `uc ]
-"71
-[; ;MASTER.c: 71:         _delay((unsigned long)((0.8)*(4000000/4000.0)));
-[e ( __delay (1 -> * .0.8 / -> -> 4000000 `l `d .4000.0 `ul ]
-"73
-[; ;MASTER.c: 73:     }
+"72
+[; ;MASTER.c: 72:         _delay((unsigned long)((0.8)*(8000000/4000.0)));
+[e ( __delay (1 -> * .0.8 / -> -> 8000000 `l `d .4000.0 `ul ]
+"74
+[; ;MASTER.c: 74:     }
 }
 [e :U 144 ]
 [e $U 145  ]
 [e :U 146 ]
-"74
-[; ;MASTER.c: 74: }
+"75
+[; ;MASTER.c: 75: }
 [e :UE 143 ]
 }

@@ -165,13 +165,13 @@ SPI_ACTIVE_2_IDLE 64
 "32 C:\Users\Daniela Baldizon\Documents\GitHub\Lab4\Lab4D2\LAB4.X\MASTER.c
 [v _main main `(v  1 e 1 0 ]
 {
+"44
+[v main@COMPU COMPU `ui  1 a 2 22 ]
+"43
+[v main@POT2 POT2 `uc  1 a 1 25 ]
 "42
 [v main@POT1 POT1 `uc  1 a 1 24 ]
-"44
-[v main@COMPU COMPU `uc  1 a 1 23 ]
-"43
-[v main@POT2 POT2 `uc  1 a 1 22 ]
-"74
+"75
 } 0
 "34 C:\Users\Daniela Baldizon\Documents\GitHub\Lab4\Lab4D2\LAB4.X\SPIM.c
 [v _spiWrite spiWrite `(v  1 e 1 0 ]
